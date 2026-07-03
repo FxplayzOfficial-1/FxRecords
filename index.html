@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FxRecords - Music Release Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://cdn.discordapp.com/attachments/1518242332586016772/1522614718316150845/file_00000000525871fb89ad6cdeb1478611.png" alt="FxRecords Logo">
+                <span>FxRecords</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#releases" class="nav-link">Releases</a>
+                <a href="#about" class="nav-link">About</a>
+                <button id="authToggleBtn" class="nav-btn">Sign In</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to FxRecords</h1>
+            <p>Your Premier Music Release Platform</p>
+            <button id="heroSignUpBtn" class="btn-primary">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="main-content">
+        <!-- Releases Section -->
+        <section id="releases" class="releases-section">
+            <h2>Latest Releases</h2>
+            <div id="releasesList" class="releases-grid">
+                <!-- Releases will be populated here -->
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <h2>About FxRecords</h2>
+            <p>FxRecords is your trusted platform for music releases, news, and artist updates. Stay connected with your favorite artists through our SMS notification system.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <img src="https://cdn.discordapp.com/attachments/1518242332586016772/1522614698552332420/icon.png" alt="YouTube">
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            
+            <!-- Sign In Tab -->
+            <div id="signInTab" class="auth-tab active">
+                <h2>Sign In</h2>
+                <form id="signInForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="signInEmail">Email:</label>
+                        <input type="email" id="signInEmail" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signInPassword">Password:</label>
+                        <input type="password" id="signInPassword" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-primary">Sign In</button>
+                    <p class="tab-switch">Don't have an account? <a href="#" id="switchToSignUp">Sign Up</a></p>
+                </form>
+            </div>
+
+            <!-- Sign Up Tab -->
+            <div id="signUpTab" class="auth-tab hidden">
+                <h2>Sign Up</h2>
+                <form id="signUpForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="signUpName">Full Name:</label>
+                        <input type="text" id="signUpName" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpEmail">Email:</label>
+                        <input type="email" id="signUpEmail" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpPhone">Phone Number:</label>
+                        <input type="tel" id="signUpPhone" required placeholder="+1234567890">
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpPassword">Password:</label>
+                        <input type="password" id="signUpPassword" required placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpConfirmPassword">Confirm Password:</label>
+                        <input type="password" id="signUpConfirmPassword" required placeholder="••••••••">
+                    </div>
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="signUpNotifications" checked>
+                        <label for="signUpNotifications">Receive SMS notifications for releases and news</label>
+                    </div>
+                    <button type="submit" class="btn-primary">Sign Up</button>
+                    <p class="tab-switch">Already have an account? <a href="#" id="switchToSignIn">Sign In</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard (Shown after login) -->
+    <div id="dashboardModal" class="modal hidden">
+        <div class="modal-content dashboard">
+            <button class="modal-close">&times;</button>
+            
+            <div class="dashboard-header">
+                <h2>Welcome, <span id="userNameDisplay">User</span>!</h2>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+
+            <div class="dashboard-tabs">
+                <button class="dashboard-tab-btn active" data-tab="profile">Profile</button>
+                <button class="dashboard-tab-btn" data-tab="notifications">Notifications</button>
+                <button class="dashboard-tab-btn" data-tab="releases">My Releases</button>
+            </div>
+
+            <!-- Profile Tab -->
+            <div id="profileTab" class="dashboard-tab-content active">
+                <h3>Profile Information</h3>
+                <div class="profile-info">
+                    <p><strong>Name:</strong> <span id="profileName">-</span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail">-</span></p>
+                    <p><strong>Phone:</strong> <span id="profilePhone">-</span></p>
+                    <p><strong>SMS Notifications:</strong> <span id="profileNotifications">-</span></p>
+                </div>
+                <button id="editProfileBtn" class="btn-primary">Edit Profile</button>
+            </div>
+
+            <!-- Notifications Tab -->
+            <div id="notificationsTab" class="dashboard-tab-content hidden">
+                <h3>Notification Settings</h3>
+                <div class="notification-settings">
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="notificationReleases" checked>
+                            Notify me about new releases
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="notificationNews" checked>
+                            Notify me about news and updates
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="notificationAnnouncements" checked>
+                            Notify me about announcements
+                        </label>
+                    </div>
+                </div>
+                <button id="saveNotificationsBtn" class="btn-primary">Save Preferences</button>
+            </div>
+
+            <!-- Releases Tab -->
+            <div id="releasesTab" class="dashboard-tab-content hidden">
+                <h3>Your Releases</h3>
+                <div id="userReleasesList" class="releases-grid">
+                    <!-- User's releases will be shown here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel (For notifications) -->
+    <div id="adminModal" class="modal hidden">
+        <div class="modal-content admin">
+            <button class="modal-close">&times;</button>
+            
+            <h2>Admin - Send Notifications</h2>
+            <form id="notificationForm" class="auth-form">
+                <div class="form-group">
+                    <label for="notificationTitle">Title:</label>
+                    <input type="text" id="notificationTitle" required placeholder="Release or News Title">
+                </div>
+                <div class="form-group">
+                    <label for="notificationType">Type:</label>
+                    <select id="notificationType">
+                        <option value="release">New Release</option>
+                        <option value="news">News</option>
+                        <option value="announcement">Announcement</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notificationMessage">Message:</label>
+                    <textarea id="notificationMessage" required placeholder="Message to send via SMS"></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send SMS to All Users</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
